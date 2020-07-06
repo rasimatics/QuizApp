@@ -1,36 +1,34 @@
-<html>
-    <head>
-        <title>Quiz</title>
-    </head>
-    <body>
-        <h1>Quiz</h1>
+{% extends 'base.html'%} {%block content%}
+<h1>Quiz</h1>
 
-        {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+{% with messages = get_flashed_messages() %} 
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %} 
+{% endif %} 
+{% endwith %}
 
-        <form method="post" action="{{ url_for('quiz.check') }}" enctype="multipart/form-data">
-            {% for question in questions %}
-                {% set outer_loop = loop %}
-                <p>{{ question.id }}.{{ question.question }}</p>
-                {%for answer in question.answers %}
-                    <input type="radio"
-                            {% if written %}
-                                {%if written[outer_loop.index-1]['answerId'] == answer.id %}
-                                    checked
-                                {% endif %}
-                            {% endif %}
-                           name="{{ question.id }}" value="{{ answer.id }}">
+{%if current_user.is_authenticated%}
+<h3>Hello {{current_user.email}}</h3>
+{%else%}
+<h3>Hello Guest</h3>
+{%endif%}
+<form
+  method="post"
+  action="{{ url_for('quiz.check') }}"
+  enctype="multipart/form-data"
+>
+  {% for question in questions %} {% set outer_loop = loop %}
+  <p>{{ question.id }}.{{ question.question }}</p>
+  {%for answer in question.answers %} <input type="radio" {% if written %} {%if
+  written[outer_loop.index-1]['answerId'] == answer.id %} checked {% endif %} {%
+  endif %} name="{{ question.id }}" value="{{ answer.id }}">
 
-                     <label for="{{ answer.id }}">{{ answer.answer }}</label>
-                {% endfor %}
-                <br>
-            {% endfor %}
-            <input type="submit" value="Check">
-        </form>
-    </body>
-</html>
+  <label for="{{ answer.id }}">{{ answer.answer }}</label>
+  {% endfor %}
+  <br />
+  {% endfor %}
+  <input type="submit" value="Check" />
+</form>
+{%endblock%}
