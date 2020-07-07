@@ -12,7 +12,7 @@ auth = Blueprint('auth', __name__, url_prefix='/auth')
 def register():
     form = SignUpForm()
     if form.validate_on_submit():
-        user = User(email=request.form['email'], password=generate_password_hash(
+        user = User(username=request.form['username'],email=request.form['email'], password=generate_password_hash(
             request.form['password'], method='sha256'))
         db.session.add(user)
         db.session.commit()

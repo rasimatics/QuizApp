@@ -10,7 +10,7 @@
 {% endwith %}
 
 {%if current_user.is_authenticated%}
-<h3>Hello {{current_user.email}}</h3>
+<h3>Hello {{current_user.username}}</h3>
 {%else%}
 <h3>Hello Guest</h3>
 {%endif%}
