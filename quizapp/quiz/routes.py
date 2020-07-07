@@ -1,7 +1,7 @@
 from flask import Blueprint, render_template, request, redirect, flash
 from .models import Answer, Question
 
-quiz = Blueprint('quiz', __name__)
+quiz = Blueprint('quiz', __name__, url_prefix='/quiz')
 
 
 @quiz.route('/', methods=['GET'])

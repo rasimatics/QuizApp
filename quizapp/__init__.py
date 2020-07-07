@@ -41,5 +41,8 @@ def create_app():
     from quizapp.auth.routes import auth
     app.register_blueprint(auth)
 
+    from quizapp.main.routes import main
+    app.register_blueprint(main)
+
 
     return app

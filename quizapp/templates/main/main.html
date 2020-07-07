@@ -1,0 +1,17 @@
+{% extends 'base.html'%} {%block content%}
+<h1>Main Page</h1>
+
+{% with messages = get_flashed_messages() %} 
+{% if messages %}
+{% for message in messages %}
+<p>{{ message }}</p>
+{% endfor %} 
+{% endif %} 
+{% endwith %}
+
+{%if current_user.is_authenticated%}
+<h3>Hello {{current_user.username}}</h3>
+{%else%}
+<h3>Hello Guest</h3>
+{%endif%}
+{%endblock%}
