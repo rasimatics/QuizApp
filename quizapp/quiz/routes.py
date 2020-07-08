@@ -1,10 +1,13 @@
 from flask import Blueprint, render_template, request, redirect, flash
 from .models import Answer, Question
 from quizapp import db
+from flask_login import login_required
+
 
 quiz = Blueprint('quiz', __name__, url_prefix='/quiz/')
 
 @quiz.route('/', methods=['GET'])
+@login_required
 def questions():
     questions = Question.query.all()
     answers = Answer.query.all()
@@ -12,6 +15,7 @@ def questions():
 
 
 @quiz.route('/', methods=['POST'])
+@login_required
 def check():
     if request.method == "POST":
         questions = list(dict(request.form))
