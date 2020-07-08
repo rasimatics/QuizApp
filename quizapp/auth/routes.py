@@ -45,3 +45,11 @@ def logout():
     logout_user()
     flash("You logged out!")
     return redirect(url_for('quiz.questions'))
+
+@auth.route('/users')
+@auth.route('/users/<int:page>')
+@login_required
+def users(page=1):
+    users = User.query.paginate(page,1,False)
+    return render_template('auth/users.html',users=users)
+

@@ -1,0 +1,17 @@
+{%extends 'base.html'%} 
+{%block content%}
+
+{%for user in users.items%}
+    <h1>{{user.username}}</h1>
+{%endfor%}
+
+
+{%for page in users.iter_pages(left_edge=1,left_current=1, right_current=2,right_edge=1)%}
+    {%if page%}
+        <a href="{{url_for('auth.users',page=page)}}">{{page}}</a>
+    {%else%}
+        ...
+    {%endif%}
+{%endfor%}
+
+{%endblock%}

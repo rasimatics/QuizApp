@@ -12,3 +12,4 @@ class Answer(db.Model):
     questions = db.Column(db.Integer, db.ForeignKey('question.id'),nullable=False)
 
 
+

@@ -1,8 +1,8 @@
 from flask import Blueprint, render_template, request, redirect, flash
 from .models import Answer, Question
+from quizapp import db
 
-quiz = Blueprint('quiz', __name__, url_prefix='/quiz')
-
+quiz = Blueprint('quiz', __name__, url_prefix='/quiz/')
 
 @quiz.route('/', methods=['GET'])
 def questions():

@@ -15,7 +15,7 @@
   enctype="multipart/form-data"
 >
   {% for question in questions %} {% set outer_loop = loop %}
-  <p>{{ question.id }}.{{ question.question }}</p>
+  <p>{{ question.question }}</p>
   {%for answer in question.answers %} <input type="radio" {% if written %} {%if
   written[outer_loop.index-1]['answerId'] == answer.id %} checked {% endif %} {%
   endif %} name="{{ question.id }}" value="{{ answer.id }}">
@@ -24,6 +24,7 @@
   {% endfor %}
   <br />
   {% endfor %}
-  <input type="submit" value="Check" />
+
+<input type="submit" value="Check" />
 </form>
 {%endblock%}
